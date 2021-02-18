@@ -1,0 +1,31 @@
+{
+  "npmScope": "hocss",
+  "affected": { "defaultBase": "master" },
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "ZWNkY2Q2ZTgtMTMyYS00NzJjLTk0ZjgtMmZlODE2MDIxZWFhfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "web-component": { "tags": [] },
+    "web-component-e2e": {
+      "tags": [],
+      "implicitDependencies": ["web-component"]
+    },
+    "atomic": { "tags": [] }
+  }
+}

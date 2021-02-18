@@ -1,0 +1,143 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/web"
+  },
+  "defaultProject": "web-component",
+  "projects": {
+    "web-component": {
+      "root": "apps/web-component",
+      "sourceRoot": "apps/web-component/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/web-component",
+            "index": "apps/web-component/src/index.html",
+            "main": "apps/web-component/src/main.ts",
+            "polyfills": "apps/web-component/src/polyfills.ts",
+            "tsConfig": "apps/web-component/tsconfig.app.json",
+            "assets": [
+              "apps/web-component/src/favicon.ico",
+              "apps/web-component/src/assets"
+            ],
+            "styles": [
+              "apps/web-component/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/web-component/src/environments/environment.ts",
+                  "with": "apps/web-component/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "web-component:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "web-component:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/web-component/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/web-component"
+          ],
+          "options": {
+            "jestConfig": "apps/web-component/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "web-component-e2e": {
+      "root": "apps/web-component-e2e",
+      "sourceRoot": "apps/web-component-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/web-component-e2e/cypress.json",
+            "tsConfig": "apps/web-component-e2e/tsconfig.e2e.json",
+            "devServerTarget": "web-component:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "web-component:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/web-component-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "atomic": {
+      "root": "libs/atomic",
+      "sourceRoot": "libs/atomic/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/atomic/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/atomic"
+          ],
+          "options": {
+            "jestConfig": "libs/atomic/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  }
+}
